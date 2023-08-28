@@ -1,7 +1,25 @@
+import 'dart:ui';
+
 ///
-/// 디바이스 크기 : 852px
-/// 핸드폰 상단 메뉴 : 44px
-/// 앱의 상단 메뉴 : 60px
-/// 메인 페이지 : 748px
-/// (앱의 상단 메뉴 : 메인 페이지) = 1 : 12
+/// 색상
 ///
+const int app_background = 0xF8F8FAFF;
+const int wdiget_background = 0xFFFFFFFF;
+const int btn_background = 0x0063D1FF;
+const int font_color_1 = 0x191919FF;
+const int font_color_2 = 0x767676FF;
+const int etc_color_1 = 0xF1F1F5FF;
+const int etc_color_2 = 0xFF3120FF;
+const int etc_color_3 = 0x00438CFF;
+
+///
+/// 글자
+///
+// 테마
+const String font_family = "pretendard";
+// 사이즈
+const List<int> font_size = [11, 12, 14, 16, 18, 30];
+// 가중치
+const FontWeight bold = FontWeight.w900;
+const FontWeight medium = FontWeight.w600;
+const FontWeight regular = FontWeight.w300;

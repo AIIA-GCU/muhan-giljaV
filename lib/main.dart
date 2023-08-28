@@ -4,6 +4,8 @@
 /// - 위젯은 모두 같은 크기
 ///
 
+import 'package:aiia/config.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,8 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "무한길잡이",
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: font_family),
+      title: "무한길잡이",
       home: HomePage(),
     );
   }
