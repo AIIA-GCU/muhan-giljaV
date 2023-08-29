@@ -35,9 +35,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  table_calendar: ^3.0.9
-  dropdown_button2: ^2.1.0
-  circular_chart_flutter: ^0.0.2
 
 dev_dependencies:
   flutter_test:
@@ -78,23 +75,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: intro
+    - family: pretendard
       fonts:
-        - asset: assets/fonts/YeBbeunMinGyeongCe.ttf
-    - family: seoul
-      fonts:
-        - asset: assets/fonts/Seoul/SeoulHangangM.ttf
-        - asset: assets/fonts/Seoul/SeoulHangangL.ttf
-          weight: 400
-        - asset: assets/fonts/Seoul/SeoulHangangB.ttf
-          weight: 700
-    - family: nanum
-      fonts:
-        - asset: assets/fonts/Nanum/NanumSquareR.ttf
-        - asset: assets/fonts/Nanum/NanumSquareL.ttf
-          weight: 400
-        - asset: assets/fonts/Nanum/NanumSquareB.ttf
-          weight: 700
+        - asset: C:\Users\MY\StudioProject\Muhan-giljabi\assets\fonts\Pretendard-1.3.8\public\static\Pretendard-Regular.otf
+          weight: 300
+        - asset: C:\Users\MY\StudioProject\Muhan-giljabi\assets\fonts\Pretendard-1.3.8\public\static\Pretendard-Medium.otf
+          weight: 600
+        - asset: C:\Users\MY\StudioProject\Muhan-giljabi\assets\fonts\Pretendard-1.3.8\public\static\Pretendard-Bold.otf
+          weight: 900
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
