@@ -77,12 +77,15 @@ flutter:
   fonts:
     - family: pretendard
       fonts:
-        - asset: C:\Users\MY\StudioProject\Muhan-giljabi\assets\fonts\Pretendard-1.3.8\public\static\Pretendard-Regular.otf
+        - asset: assets\fonts\Pretendard\public\static\Pretendard-Regular.otf
           weight: 300
-        - asset: C:\Users\MY\StudioProject\Muhan-giljabi\assets\fonts\Pretendard-1.3.8\public\static\Pretendard-Medium.otf
+        - asset: assets\fonts\Pretendard\public\static\Pretendard-Medium.otf
           weight: 600
-        - asset: C:\Users\MY\StudioProject\Muhan-giljabi\assets\fonts\Pretendard-1.3.8\public\static\Pretendard-Bold.otf
+        - asset: assets\fonts\Pretendard\public\static\Pretendard-Bold.otf
           weight: 900
+    - family: CustomIcon
+      fonts:
+        - asset: assets\fonts\CustomIcon.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -16,7 +16,7 @@ class MyGrade extends StatefulWidget {
 }
 
 class _MyGradeState extends State<MyGrade> {
-  bool isUpload = true; // 성적 업로드를 했는가?
+  bool isUpload = false; // 성적 업로드를 했는가?
 
   List<double> avgs = [0.0, 0.0, 0.0]; // 학년별 평균
   double total_avg = 0.0; // 전체 학년 평균
@@ -45,8 +45,8 @@ class _MyGradeState extends State<MyGrade> {
                     Positioned(
                         top: 11,
                         left: 11,
-                        child: Container(
-                            width: 22, height: 22, color: Colors.red)),
+                        child: Icon(CustomIcon.document,
+                            size: 20, color: Color(btn_background))),
                     // 이름
                     Positioned(
                         top: 11,
@@ -61,11 +61,10 @@ class _MyGradeState extends State<MyGrade> {
                       Positioned(
                           top: 11,
                           right: 11,
-                          width: 22,
-                          height: 22,
                           child: GestureDetector(
                               onTap: _migratePage,
-                              child: Container(color: Colors.red)))
+                              child: Icon(CustomIcon.edit_1,
+                                  size: 20, color: Color(btn_background))))
                   ])),
               // 구분선
               const Divider(thickness: 1, color: Color(line_color)),
@@ -74,7 +73,7 @@ class _MyGradeState extends State<MyGrade> {
                   child: isUpload
                       // 성적이 업로드 된 경우
                       ? Container(
-                          margin:
+                      margin:
                               EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                           child: Column(children: [
                             Container(
@@ -174,12 +173,10 @@ class _MyGradeState extends State<MyGrade> {
                           ]))
                       // 성적이 업로드 되지 않은 경우
                       : Center(
-                          child: Container(
-                              width: 56,
-                              height: 56,
-                              child: GestureDetector(
-                                  onTap: _migratePage,
-                                  child: Container(color: Colors.red)))))
+                          child: GestureDetector(
+                              onTap: _migratePage,
+                              child: Icon(CustomIcon.add_1,
+                                  size: 52, color: Color(btn_background)))))
             ])));
   }
 }
