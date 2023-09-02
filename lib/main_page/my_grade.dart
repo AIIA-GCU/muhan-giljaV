@@ -63,7 +63,7 @@ class _MyGradeState extends State<MyGrade> {
                           right: 11,
                           child: GestureDetector(
                               onTap: _migratePage,
-                              child: Icon(CustomIcon.edit_1,
+                              child: Icon(CustomIcon.edit,
                                   size: 20, color: Color(btn_background))))
                   ])),
               // 구분선
@@ -175,7 +175,7 @@ class _MyGradeState extends State<MyGrade> {
                       : Center(
                           child: GestureDetector(
                               onTap: _migratePage,
-                              child: Icon(CustomIcon.add_1,
+                              child: Icon(CustomIcon.add,
                                   size: 52, color: Color(btn_background)))))
             ])));
   }
