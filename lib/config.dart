@@ -33,13 +33,26 @@ class CustomIcon {
   CustomIcon._();
 
   static const _kFontFam = 'CustomIcon';
+  static const String? _kFontPkg = null;
 
+  static const IconData statistic =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData hamburger_menu =
-      IconData(0xe800, fontFamily: _kFontFam);
-  static const IconData statistic = IconData(0xeba5, fontFamily: _kFontFam);
-  static const IconData camera = IconData(0xeba6, fontFamily: _kFontFam);
-  static const IconData document = IconData(0xeba7, fontFamily: _kFontFam);
-  static const IconData add_1 = IconData(0xeba8, fontFamily: _kFontFam);
-  static const IconData edit_1 = IconData(0xeba9, fontFamily: _kFontFam);
-  static const IconData fullscreen_1 = IconData(0xebaa, fontFamily: _kFontFam);
+      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData add =
+      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData camera =
+      IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData fullscreen =
+      IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData edit =
+      IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chevron_down =
+      IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData check =
+      IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData document =
+      IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chevron_up =
+      IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
