@@ -58,23 +58,23 @@ class _HomeLayoutState extends State<HomeLayout> {
           Flexible(
               flex: 1,
               child: Container(
-                                  decoration: BoxDecoration(
-                                      border: Border(
-                                          bottom: BorderSide(width: 1, color: Colors.black))),
-                                  child: Center(
-                                      child: Text("입시 결과표",
-                                          style:
-                                          TextStyle(color: Colors.black, fontSize: 16))))),
-                          // 표 생성 위젯
-                          Flexible(
-                              flex: 1,
-                              child: Container(
-                                  child: Center(
-                                      child: Text("표 생성",
-                                          style:
-                                          TextStyle(color: Colors.black, fontSize: 16))))),
-                        ])),
-                  )
-                ]))));
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(width: 1, color: Colors.black))),
+                  child: Center(
+                      child: Text("입시 결과표",
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 16))))),
+          // 표 생성 위젯
+          Flexible(
+              flex: 1,
+              child: Container(
+                  child: Center(
+                      child: Text("표 생성",
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 16))))),
+        ])),
+      )
+    ]))));
   }
 }

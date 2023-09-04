@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:aiia/satPage.dart';
-import 'package:aiia/schPage.dart';
+import 'package:aiia/grade_upload_page/satPage.dart';
+import 'package:aiia/grade_upload_page/schPage.dart';
 
 import 'package:aiia/config.dart';
 
