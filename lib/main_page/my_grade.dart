@@ -46,7 +46,7 @@ class _MyGradeState extends State<MyGrade> {
                         top: 11,
                         left: 11,
                         child: Icon(CustomIcon.document,
-                            size: 20, color: Color(btn_background))),
+                            size: 22, color: Color(btn_background))),
                     // 이름
                     Positioned(
                         top: 11,

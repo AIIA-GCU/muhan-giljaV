@@ -6,6 +6,7 @@
 
 import 'package:aiia/config.dart';
 import 'package:aiia/main_page/my_grade.dart';
+import 'package:aiia/main_page/major_info.dart';
 
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body: Container(/*color: Colors.pink,*/
             child: SafeArea(
                 child: Column(children: [
       // 상단 메뉴
@@ -57,14 +58,8 @@ class _HomeLayoutState extends State<HomeLayout> {
           // 입시 결과표 위젯
           Flexible(
               flex: 1,
-              child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(width: 1, color: Colors.black))),
-                  child: Center(
-                      child: Text("입시 결과표",
-                          style:
-                              TextStyle(color: Colors.black, fontSize: 16))))),
+              child: MajorInfo()
+          ),
           // 표 생성 위젯
           Flexible(
               flex: 1,
