@@ -32,6 +32,7 @@ class _MyGradeState extends State<MyGrade> {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
+            height: 200,
             margin: EdgeInsets.symmetric(horizontal: 24, vertical: 6),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -43,19 +44,22 @@ class _MyGradeState extends State<MyGrade> {
                   child: Stack(children: [
                     // 아이콘
                     Positioned(
-                        top: 11,
-                        left: 11,
-                        child: Icon(CustomIcon.document,
-                            size: 22, color: Color(btn_background))),
-                    // 이름
-                    Positioned(
-                        top: 11,
-                        left: 36,
-                        child: Text("My Grade",
-                            style: TextStyle(
-                                fontWeight: medium,
-                                fontSize: font_size[4],
-                                color: Color(font_color_1)))),
+                      top: 11,
+                      left: 11,
+                      child: Row(
+                        children: [
+                          Icon(CustomIcon.document, size: 22, color: Color(btn_background)),
+                          SizedBox(width: 4,),
+                          Text("My Grade",
+                              style: TextStyle(
+                                  fontWeight: medium,
+                                  fontSize: font_size[4],
+                                  color: Color(font_color_1)
+                              )
+                          )
+                        ],
+                      ),
+                    ),
                     // 수정 버튼
                     if (isUpload)
                       Positioned(
@@ -67,7 +71,9 @@ class _MyGradeState extends State<MyGrade> {
                                   size: 20, color: Color(btn_background))))
                   ])),
               // 구분선
-              const Divider(thickness: 1, color: Color(line_color)),
+              //Divider위젯은 기본 마진값이 있어서 밑 내용들에 위치를 잡기 힘들어 Container로 대체합니다.
+              Container(height: 1,margin: EdgeInsets.only(left: 0,top: 11,right: 0,bottom: 0),color: Color(line_color)),
+
               // 성적
               Expanded(
                   child: isUpload
