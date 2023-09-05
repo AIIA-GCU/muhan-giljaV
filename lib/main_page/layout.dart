@@ -27,7 +27,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(color: Colors.pink,
+        body: Container(/*color: Colors.pink,*/
             child: SafeArea(
                 child: Column(children: [
       // 상단 메뉴
