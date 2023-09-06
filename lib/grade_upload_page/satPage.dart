@@ -159,269 +159,263 @@ class _SATPageState extends State<SATPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: font_family),
-        title: "무한길잡이",
-        home: Scaffold(
-          body: ListView(children: [
-            Container(
-              color: Color(app_background),
-              padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Transform.translate(
-                      offset: Offset(-10, 0),
-                      child: IconButton(
-                        icon: Icon(
-                          color: Colors.black,
-                          Icons.arrow_back_rounded,
+    return Scaffold(
+      body: ListView(children: [
+        Container(
+          color: Color(app_background),
+          padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Transform.translate(
+                  offset: Offset(-10, 0),
+                  child: IconButton(
+                    icon: Icon(
+                      color: Colors.black,
+                      Icons.arrow_back_rounded,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(
+                        PageRouteBuilder(
+                          transitionsBuilder:
+                          // secondaryAnimation: 화면 전화시 사용되는 보조 애니메이션효과
+                          // child: 화면이 전환되는 동안 표시할 위젯을 의미(즉, 전환 이후 표시될 위젯 정보를 의미)
+                              (context, animation, secondaryAnimation,
+                              child) {
+                            // Offset에서 x값 1은 오른쪽 끝 y값 1은 아래쪽 끝을 의미한다.
+                            // 애니메이션이 시작할 포인트 위치를 의미한다.
+                            var begin = const Offset(-1.0, 0);
+                            var end = Offset.zero;
+                            // Curves.ease: 애니메이션이 부드럽게 동작하도록 명령
+                            var curve = Curves.ease;
+                            // 애니메이션의 시작과 끝을 담당한다.
+                            var tween = Tween(
+                              begin: begin,
+                              end: end,
+                            ).chain(
+                              CurveTween(
+                                curve: curve,
+                              ),
+                            );
+                            return SlideTransition(
+                              position: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                          // 함수를 통해 Widget을 pageBuilder에 맞는 형태로 반환하게 해야한다.
+                          pageBuilder: (context, animation,
+                              secondaryAnimation) =>
+                          // (DetailScreen은 Stateless나 Stateful 위젯으로된 화면임)
+                          MainPage(),
+                          // 이것을 true로 하면 dialog로 취급한다.
+                          // 기본값은 false
+                          fullscreenDialog: false,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop(
-                            PageRouteBuilder(
-                              transitionsBuilder:
-                                  // secondaryAnimation: 화면 전화시 사용되는 보조 애니메이션효과
-                                  // child: 화면이 전환되는 동안 표시할 위젯을 의미(즉, 전환 이후 표시될 위젯 정보를 의미)
-                                  (context, animation, secondaryAnimation,
-                                      child) {
-                                // Offset에서 x값 1은 오른쪽 끝 y값 1은 아래쪽 끝을 의미한다.
-                                // 애니메이션이 시작할 포인트 위치를 의미한다.
-                                var begin = const Offset(-1.0, 0);
-                                var end = Offset.zero;
-                                // Curves.ease: 애니메이션이 부드럽게 동작하도록 명령
-                                var curve = Curves.ease;
-                                // 애니메이션의 시작과 끝을 담당한다.
-                                var tween = Tween(
-                                  begin: begin,
-                                  end: end,
-                                ).chain(
-                                  CurveTween(
-                                    curve: curve,
-                                  ),
-                                );
-                                return SlideTransition(
-                                  position: animation.drive(tween),
-                                  child: child,
-                                );
-                              },
-                              // 함수를 통해 Widget을 pageBuilder에 맞는 형태로 반환하게 해야한다.
-                              pageBuilder: (context, animation,
-                                      secondaryAnimation) =>
-                                  // (DetailScreen은 Stateless나 Stateful 위젯으로된 화면임)
-                                  MainPage(),
-                              // 이것을 true로 하면 dialog로 취급한다.
-                              // 기본값은 false
-                              fullscreenDialog: false,
-                            ),
-                          );
-                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(height: 12),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13),
+                  color: Color(widget_background),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 17, 0, 0),
+                      alignment: Alignment.topCenter,
+                      child: Text(
+                        "수능",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: font_size[4],
+                          fontWeight: medium,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 12,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13),
-                      color: Color(widget_background),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(13),
+                        color: Color(widget_background),
+                      ),
+                      padding: EdgeInsets.all(20),
+                      height:
+                      MediaQuery.of(context).size.shortestSide * 0.75,
+                      width: double.infinity,
+                      child: _loadSuNeungPng(),
                     ),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 17, 0, 0),
-                          alignment: Alignment.topCenter,
-                          child: Text(
+                  ],
+                ),
+              ),
+              Container(
+                height: 15,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13),
+                  color: Color(widget_background),
+                ),
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(11),
+                      child: Row(
+                        children: [
+                          //아이콘
+                          Icon(CustomIcon.document,
+                              size: 20, color: Color(btn_background)),
+                          Container(
+                            width: 4,
+                          ),
+                          // 이름
+                          Text(
                             "수능",
                             style: TextStyle(
-                              color: Colors.black,
-                              fontSize: font_size[4],
                               fontWeight: medium,
+                              fontSize: font_size[4],
+                              color: Color(font_color_1),
                             ),
                           ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(13),
-                            color: Color(widget_background),
-                          ),
-                          padding: EdgeInsets.all(20),
-                          height:
-                              MediaQuery.of(context).size.shortestSide * 0.75,
-                          width: double.infinity,
-                          child: _loadSuNeungPng(),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: 15,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13),
-                      color: Color(widget_background),
+                    Container(
+                      height: 1,
+                      width: double.infinity,
+                      color: Color(0xffDBDBDB),
                     ),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(11),
-                          child: Row(
-                            children: [
-                              //아이콘
-                              Icon(CustomIcon.document,
-                                  size: 20, color: Color(btn_background)),
-                              Container(
-                                width: 4,
-                              ),
-                              // 이름
-                              Text(
-                                "수능",
-                                style: TextStyle(
-                                  fontWeight: medium,
-                                  fontSize: font_size[4],
-                                  color: Color(font_color_1),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 1,
-                          width: double.infinity,
+                    Table(
+                      columnWidths: {
+                        0: FractionColumnWidth(.5),
+                        1: FractionColumnWidth(.5)
+                      },
+                      border: TableBorder.symmetric(
+                        inside: BorderSide(
+                          width: 1,
                           color: Color(0xffDBDBDB),
                         ),
-                        Table(
-                          columnWidths: {
-                            0: FractionColumnWidth(.5),
-                            1: FractionColumnWidth(.5)
-                          },
-                          border: TableBorder.symmetric(
-                            inside: BorderSide(
-                              width: 1,
-                              color: Color(0xffDBDBDB),
-                            ),
-                          ),
+                      ),
+                      children: [
+                        TableRow(
                           children: [
-                            TableRow(
-                              children: [
-                                tableHeadText('과목명'),
-                                tableHeadText('성적'),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                tableDataText('국어', true),
-                                tableDataText('97', true),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                tableDataText('영어', true),
-                                tableDataText('97', true),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                tableDataText('수학', true),
-                                tableDataText('100', true),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                tableDataText('한국사', true),
-                                tableDataText('100', false),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                tableDataText('탐구1', true),
-                                tableDataText('100', false),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                tableDataText('탐구2', true),
-                                tableDataText('100', false),
-                              ],
-                            ),
+                            tableHeadText('과목명'),
+                            tableHeadText('성적'),
                           ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 15,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13),
-                      color: Color(widget_background),
-                    ),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(11),
-                          child: Row(
-                            children: [
-                              //아이콘
-                              Icon(CustomIcon.document,
-                                  size: 20, color: Color(btn_background)),
-                              Container(
-                                width: 4,
-                              ),
-                              // 이름
-                              Text(
-                                "산출결과",
-                                style: TextStyle(
-                                  fontWeight: medium,
-                                  fontSize: font_size[4],
-                                  color: Color(font_color_1),
-                                ),
-                              ),
-                            ],
-                          ),
                         ),
-                        Container(
-                          height: 1,
-                          width: double.infinity,
-                          color: Color(0xffDBDBDB),
-                        ),
-                        Table(
-                          columnWidths: {
-                            0: FractionColumnWidth(.5),
-                            1: FractionColumnWidth(.5)
-                          },
-                          border: TableBorder.symmetric(
-                            inside: BorderSide(
-                              width: 1,
-                              color: Color(0xffDBDBDB),
-                            ),
-                          ),
+                        TableRow(
                           children: [
-                            TableRow(
-                              children: [
-                                tableHeadText('수능'),
-                                tableHeadText('성적'),
-                              ],
-                            ),
+                            tableDataText('국어', true),
+                            tableDataText('97', true),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            tableDataText('영어', true),
+                            tableDataText('97', true),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            tableDataText('수학', true),
+                            tableDataText('100', true),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            tableDataText('한국사', true),
+                            tableDataText('100', false),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            tableDataText('탐구1', true),
+                            tableDataText('100', false),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            tableDataText('탐구2', true),
+                            tableDataText('100', false),
                           ],
                         ),
                       ],
-                    ),
-                  ),
-                  Container(
-                    height: 55,
-                  ),
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
-          ]),
-        ));
+              Container(
+                height: 15,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(13),
+                  color: Color(widget_background),
+                ),
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(11),
+                      child: Row(
+                        children: [
+                          //아이콘
+                          Icon(CustomIcon.document,
+                              size: 20, color: Color(btn_background)),
+                          Container(
+                            width: 4,
+                          ),
+                          // 이름
+                          Text(
+                            "산출결과",
+                            style: TextStyle(
+                              fontWeight: medium,
+                              fontSize: font_size[4],
+                              color: Color(font_color_1),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 1,
+                      width: double.infinity,
+                      color: Color(0xffDBDBDB),
+                    ),
+                    Table(
+                      columnWidths: {
+                        0: FractionColumnWidth(.5),
+                        1: FractionColumnWidth(.5)
+                      },
+                      border: TableBorder.symmetric(
+                        inside: BorderSide(
+                          width: 1,
+                          color: Color(0xffDBDBDB),
+                        ),
+                      ),
+                      children: [
+                        TableRow(
+                          children: [
+                            tableHeadText('수능'),
+                            tableHeadText('성적'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 55,
+              ),
+            ],
+          ),
+        ),
+      ]),
+    );
   }
 }

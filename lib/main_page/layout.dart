@@ -5,6 +5,7 @@
 ///
 
 import 'package:aiia/config.dart';
+import 'package:aiia/main_page/add_average.dart';
 import 'package:aiia/main_page/my_grade.dart';
 import 'package:aiia/main_page/major_info.dart';
 
@@ -18,6 +19,10 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> {
+
+  // 입시 결과표 리스트
+  List<Widget> _children = [MajorInfo()];
+
   // 설정 페이지 이동
   void _migratePage() {
     Navigator.push(
@@ -56,19 +61,9 @@ class _HomeLayoutState extends State<HomeLayout> {
           // My Grade 위젯 - 이현
           MyGrade(),
           // 입시 결과표 위젯 - 호성
-          Column(
-              children: [
-                MajorInfo(),
-                //여기로 여러 학과 정보들이 MajorInfo위젯 형태로 추가 되어야 겠죠?
-              ]
-          ),
+          Column(children: _children),
           // 표 생성 위젯 - 승우
-          Container(
-              height: 296,
-              child: Center(
-                  child: Text("표 생성",
-                      style:
-                          TextStyle(color: Colors.black, fontSize: 16)))),
+          AddAverage()
         ])),
       )
     ]))));
