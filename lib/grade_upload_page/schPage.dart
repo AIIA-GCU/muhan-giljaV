@@ -179,7 +179,7 @@ class _SCHPageState extends State<SCHPage> {
                           Icons.arrow_back_rounded,
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pop(
                             PageRouteBuilder(
                               transitionsBuilder:
                                   // secondaryAnimation: 화면 전화시 사용되는 보조 애니메이션효과
