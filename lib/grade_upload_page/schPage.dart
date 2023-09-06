@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:aiia/config.dart';
 import 'mainPage.dart';
+import 'dart:math' as math;
 
 class SCHPage extends StatefulWidget {
   const SCHPage({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class SCHPage extends StatefulWidget {
 class _SCHPageState extends State<SCHPage> {
   String url = " "; // 교과 성적표 사진 표시를 위한 파일 주소
   bool suSiPngOn = false;
+  List grade = ['1학년 1학기', '1학년 2학기', '2학년 1학기', '2학년 2학기', '3학년 1학기'];
+  int gradeSelector = 0;
 
   //교과 성적표 헤드 부분
   Widget _tableHeadText(String id) {
@@ -102,19 +105,6 @@ class _SCHPageState extends State<SCHPage> {
               //   image: AssetImage(url),
               //   fit: BoxFit.fitWidth,
               // ),
-              IconButton(
-                  onPressed: () {
-                    // 수능 성적표 사진 표시를 위한 함수, 버튼 클릭 시 이 함수를 실행해 url 주소를 입력함
-                    setState(() {
-                      url = " ";
-                    });
-                    suSiPngOn = false;
-                  },
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: Color(app_background),
-                    size: 50,
-                  )),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -129,9 +119,8 @@ class _SCHPageState extends State<SCHPage> {
                     child: Icon(
                       CustomIcon.camera,
                       size: 62,
-                      color: suSiPngOn
-                          ? Color(0xffFFFFFF)
-                          : Color(btn_background),
+                      color:
+                          suSiPngOn ? Color(0xffFFFFFF) : Color(btn_background),
                     ),
                   ),
                   Container(
@@ -142,15 +131,104 @@ class _SCHPageState extends State<SCHPage> {
                     style: TextStyle(
                       fontWeight: medium,
                       fontSize: font_size[4],
-                      color: suSiPngOn
-                          ? Color(0xffFFFFFF)
-                          : Color(btn_background),
+                      color:
+                          suSiPngOn ? Color(0xffFFFFFF) : Color(btn_background),
                     ),
                   ),
                 ],
               ),
             ]),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _loadGrade(
+      String a,
+      String b,
+      String c,
+      String d,
+      String e,
+      String f,
+      String a1,
+      String b1,
+      String c1,
+      String d1,
+      String e1,
+      String f1,
+      String a2,
+      String b2,
+      String c2,
+      String d2,
+      String e2,
+      String f2,
+      bool a3,
+      bool b3,
+      bool c3,
+      bool d3,
+      bool e3,
+      bool f3) {
+    return Table(
+      columnWidths: {
+        0: FractionColumnWidth(.36),
+        1: FractionColumnWidth(.3),
+        2: FractionColumnWidth(.34),
+      },
+      border: TableBorder.symmetric(
+          inside: BorderSide(
+        width: 2.4,
+        color: Color(0xffDBDBDB),
+      )),
+      children: [
+        TableRow(
+          children: [
+            _tableHeadText('과목명'),
+            _tableHeadText('교과 / 비교과'),
+            _tableHeadText('성적'),
+          ],
+        ),
+        TableRow(
+          children: [
+            _tableDataText(a, a3),
+            _tableDataText(a1, a3),
+            _tableDataText(a2, a3),
+          ],
+        ),
+        TableRow(
+          children: [
+            _tableDataText(b, b3),
+            _tableDataText(b1, b3),
+            _tableDataText(b2, b3),
+          ],
+        ),
+        TableRow(
+          children: [
+            _tableDataText(c, c3),
+            _tableDataText(c1, c3),
+            _tableDataText(c2, c3),
+          ],
+        ),
+        TableRow(
+          children: [
+            _tableDataText(d, d3),
+            _tableDataText(d1, d3),
+            _tableDataText(d2, d3),
+          ],
+        ),
+        TableRow(
+          children: [
+            _tableDataText(e, e3),
+            _tableDataText(e1, e3),
+            _tableDataText(e2, e3),
+          ],
+        ),
+        TableRow(
+          children: [
+            _tableDataText(f, f3),
+            _tableDataText(f1, f3),
+            _tableDataText(f2, f3),
+          ],
         ),
       ],
     );
@@ -178,10 +256,9 @@ class _SCHPageState extends State<SCHPage> {
                       Navigator.of(context).pop(
                         PageRouteBuilder(
                           transitionsBuilder:
-                          // secondaryAnimation: 화면 전화시 사용되는 보조 애니메이션효과
-                          // child: 화면이 전환되는 동안 표시할 위젯을 의미(즉, 전환 이후 표시될 위젯 정보를 의미)
-                              (context, animation, secondaryAnimation,
-                              child) {
+                              // secondaryAnimation: 화면 전화시 사용되는 보조 애니메이션효과
+                              // child: 화면이 전환되는 동안 표시할 위젯을 의미(즉, 전환 이후 표시될 위젯 정보를 의미)
+                              (context, animation, secondaryAnimation, child) {
                             // Offset에서 x값 1은 오른쪽 끝 y값 1은 아래쪽 끝을 의미한다.
                             // 애니메이션이 시작할 포인트 위치를 의미한다.
                             var begin = const Offset(-1.0, 0);
@@ -204,9 +281,9 @@ class _SCHPageState extends State<SCHPage> {
                           },
                           // 함수를 통해 Widget을 pageBuilder에 맞는 형태로 반환하게 해야한다.
                           pageBuilder: (context, animation,
-                              secondaryAnimation) =>
-                          // (DetailScreen은 Stateless나 Stateful 위젯으로된 화면임)
-                          MainPage(),
+                                  secondaryAnimation) =>
+                              // (DetailScreen은 Stateless나 Stateful 위젯으로된 화면임)
+                              MainPage(),
                           // 이것을 true로 하면 dialog로 취급한다.
                           // 기본값은 false
                           fullscreenDialog: false,
@@ -244,8 +321,7 @@ class _SCHPageState extends State<SCHPage> {
                         color: Color(widget_background),
                       ),
                       padding: EdgeInsets.all(20),
-                      height:
-                      MediaQuery.of(context).size.shortestSide * 0.75,
+                      height: MediaQuery.of(context).size.shortestSide * 0.75,
                       width: double.infinity,
                       child: _loadSuSiPng(),
                     ),
@@ -264,22 +340,78 @@ class _SCHPageState extends State<SCHPage> {
                 child: Column(
                   children: [
                     Container(
+                      width: double.infinity,
                       padding: EdgeInsets.all(11),
-                      child: Row(
+                      child: Stack(
                         children: [
-                          //아이콘
-                          Icon(CustomIcon.document,
-                              size: 20, color: Color(btn_background)),
-                          Container(
-                            width: 4,
+                          Positioned(
+                            child: Row(
+                              children: [
+                                //아이콘
+                                Icon(CustomIcon.document,
+                                    size: 20, color: Color(btn_background)),
+                                Container(
+                                  width: 4,
+                                ),
+                                // 이름
+                                Text(
+                                  grade[gradeSelector],
+                                  style: TextStyle(
+                                    fontWeight: medium,
+                                    fontSize: font_size[4],
+                                    color: Color(font_color_1),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          // 이름
-                          Text(
-                            "1학년 1학기",
-                            style: TextStyle(
-                              fontWeight: medium,
-                              fontSize: font_size[4],
-                              color: Color(font_color_1),
+                          Positioned(
+                            right: 0,
+                            child: Row(
+                              children: [
+                                Transform.scale(
+                                  scale: 1.75,
+                                  child: Transform.rotate(
+                                    angle: 90 * math.pi / 180,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (gradeSelector > 0)
+                                            gradeSelector = gradeSelector - 1;
+                                        });
+                                      },
+                                      child: Icon(
+                                        CustomIcon.chevron_down,
+                                        color: Color(font_color_1),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 20,
+                                ),
+                                Transform.scale(
+                                  scale: 1.75,
+                                  child: Transform.rotate(
+                                    angle: 90 * math.pi / 180,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (gradeSelector < 4)
+                                            gradeSelector = gradeSelector + 1;
+                                        });
+                                      },
+                                      child: Icon(
+                                        CustomIcon.chevron_up,
+                                        color: Color(font_color_1),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 5,
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -290,69 +422,136 @@ class _SCHPageState extends State<SCHPage> {
                       width: double.infinity,
                       color: Color(0xffDBDBDB),
                     ),
-                    Table(
-                      columnWidths: {
-                        0: FractionColumnWidth(.36),
-                        1: FractionColumnWidth(.3),
-                        2: FractionColumnWidth(.34),
-                      },
-                      border: TableBorder.symmetric(
-                          inside: BorderSide(
-                            width: 2.4,
-                            color: Color(0xffDBDBDB),
-                          )),
-                      children: [
-                        TableRow(
-                          children: [
-                            _tableHeadText('과목명'),
-                            _tableHeadText('교과 / 비교과'),
-                            _tableHeadText('성적'),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            _tableDataText('국어', true),
-                            _tableDataText('교과', false),
-                            _tableDataText('97', true),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            _tableDataText('영어', true),
-                            _tableDataText('교과', false),
-                            _tableDataText('87', true),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            _tableDataText('수학', true),
-                            _tableDataText('교과', false),
-                            _tableDataText('88', true),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            _tableDataText('한국사', false),
-                            _tableDataText('교과', false),
-                            _tableDataText('100', false),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            _tableDataText('탐구1', false),
-                            _tableDataText('교과', false),
-                            _tableDataText('100', false),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            _tableDataText('탐구2', false),
-                            _tableDataText('교과', false),
-                            _tableDataText('100', false),
-                          ],
-                        ),
-                      ],
-                    )
+                    if (gradeSelector == 0)
+                      _loadGrade(
+                          '국어',
+                          '영어',
+                          '수학(상)',
+                          '한국사',
+                          '통합과학',
+                          '통합사회',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '97',
+                          '87',
+                          '88',
+                          '100',
+                          '100',
+                          '100',
+                          true,
+                          true,
+                          true,
+                          false,
+                          false,
+                          false),
+                    if (gradeSelector == 1)
+                      _loadGrade(
+                          '국어',
+                          '영어',
+                          '수학(하)',
+                          '한국사',
+                          '통합과학',
+                          '통합사회',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '97',
+                          '87',
+                          '88',
+                          '100',
+                          '100',
+                          '100',
+                          true,
+                          true,
+                          true,
+                          false,
+                          false,
+                          false),
+                    if (gradeSelector == 2)
+                      _loadGrade(
+                          '국어',
+                          '영어',
+                          '수학 I',
+                          '한국사',
+                          '물리학 I',
+                          '화학 I',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '97',
+                          '87',
+                          '88',
+                          '100',
+                          '100',
+                          '100',
+                          true,
+                          true,
+                          true,
+                          false,
+                          false,
+                          false),
+                    if (gradeSelector == 3)
+                      _loadGrade(
+                          '국어',
+                          '영어',
+                          '수학 II',
+                          '한국사',
+                          '물리학 II',
+                          '화학 II',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '97',
+                          '87',
+                          '100',
+                          '21',
+                          '12',
+                          '46',
+                          true,
+                          true,
+                          true,
+                          false,
+                          false,
+                          false),
+                    if (gradeSelector == 4)
+                      _loadGrade(
+                          '언어와 매체',
+                          '영어',
+                          '미적분',
+                          '한국사',
+                          '탐구1',
+                          '탐구2',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '교과',
+                          '12',
+                          '87',
+                          '21',
+                          '100',
+                          '100',
+                          '100',
+                          true,
+                          true,
+                          true,
+                          false,
+                          false,
+                          false),
                   ],
                 ),
               ),

@@ -46,7 +46,7 @@ class _MainIntroductionPageState extends State<MainPage> {
                       borderRadius: BorderRadius.circular(13),
                       color: Color(widget_background),
                     ),
-                    height: 150,
+                    height: 145,
                     child: Column(
                       children: [
                         Flexible(
@@ -58,14 +58,14 @@ class _MainIntroductionPageState extends State<MainPage> {
                               "시험을 선택하세요.",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 22,
+                                fontSize: font_size[4],
                                 fontWeight: medium,
                               ),
                             ),
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 17),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -124,7 +124,7 @@ class _MainIntroductionPageState extends State<MainPage> {
                                       '교과',
                                       style: TextStyle(
                                           color: Color(0xFFFFFFFF),
-                                          fontSize: 18,
+                                          fontSize: font_size[3],
                                           fontWeight: regular),
                                     ),
                                   ),
@@ -189,7 +189,7 @@ class _MainIntroductionPageState extends State<MainPage> {
                                       '수능',
                                       style: TextStyle(
                                           color: Color(0xFFFFFFFF),
-                                          fontSize: 18,
+                                          fontSize: font_size[3],
                                           fontWeight: regular),
                                     ),
                                   ),

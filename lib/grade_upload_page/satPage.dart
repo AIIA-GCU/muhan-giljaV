@@ -103,19 +103,6 @@ class _SATPageState extends State<SATPage> {
               //   image: AssetImage(url),
               //   fit: BoxFit.fitWidth,
               // ),
-              IconButton(
-                  onPressed: () {
-                    // 수능 성적표 사진 표시를 위한 함수, 버튼 클릭 시 이 함수를 실행해 url 주소를 입력함
-                    setState(() {
-                      url = " ";
-                    });
-                    suNeungPngOn = false;
-                  },
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: Color(app_background),
-                    size: 50,
-                  )),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
