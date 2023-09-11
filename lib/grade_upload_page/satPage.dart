@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:aiia/config.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'mainPage.dart';
 
 class SATPage extends StatefulWidget {
@@ -108,18 +109,18 @@ class _SATPageState extends State<SATPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
+                      suNeungPngOn ?
                       // 수능 성적표 사진 표시를 위한 함수, 버튼 클릭 시 이 함수를 실행해 url 주소를 입력함
                       setState(() {
                         url = "assets/images/suneung.jpg";
-                      });
-                      suNeungPngOn = true;
+                      })
+                          : showToast(); // 성적표 사진이 업로드 되지 않을 경우 토스트 메세지 출력
                     },
                     child: Icon(
                       CustomIcon.camera,
                       size: 62,
-                      color: suNeungPngOn
-                          ? Color(0xffFFFFFF)
-                          : Color(btn_background),
+                      color:
+                      suNeungPngOn ? Color(0xffFFFFFF) : Color(btn_background),
                     ),
                   ),
                   Container(
@@ -141,6 +142,16 @@ class _SATPageState extends State<SATPage> {
           ),
         ),
       ],
+    );
+  }
+
+  void showToast() {
+    Fluttertoast.showToast(
+      msg: '사진이 업로드되지 않았습니다.',
+      gravity: ToastGravity.CENTER,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+      toastLength: Toast.LENGTH_SHORT,
     );
   }
 
