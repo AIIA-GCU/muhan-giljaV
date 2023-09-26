@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:aiia/config/variables.dart';
 
@@ -97,63 +98,82 @@ class Info extends StatelessWidget {
           Container(height: 1,margin: EdgeInsets.only(left: 0,top: 11,right: 0,bottom: 0),color: Color(line_color)),
           // 전형
           Container(
-            height: 58,
+            // height: 58,
             margin: EdgeInsets.only(left: 16,top: 16, right: 16, bottom: 0),
             // decoration: BoxDecoration(color: Colors.red),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AutoSizeText('교과성적우수 (30)',style: TextStyle(fontSize: 12,fontWeight: medium),),
-                SizedBox(height: 2,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AutoSizeText("00.00",style: TextStyle(fontSize: 11,color: Color(etc_color_3)),),
-                    AutoSizeText("00.00",style: TextStyle(fontSize: 11,color: Color(etc_color_2)),),
-                    AutoSizeText("00:00",style: TextStyle(fontSize: 11),),
-                  ],
-                ),
-                Stack(
-                  children: [
-                    LayoutBuilder(
-                      builder: (context, constraints) {
-                        double columnWidth = constraints.maxWidth; // 부모 Column의 가로 크기 가져오기
-                        return LinearPercentIndicator(
-                          padding: EdgeInsets.zero,
-                          width: columnWidth, // 부모 Column의 가로 크기로 설정
-                          lineHeight: 14.0, // 게이지 바의 높이
-                          percent: 0.7, // 퍼센트 값 (0.0부터 1.0까지)
-                          backgroundColor: Color(etc_color_1), // 게이지 바의 배경색
-                          progressColor: Color(btn_background), // 게이지 바의 진행색
-                          barRadius: Radius.circular(50),
-                        );
-                      },
-                    ),
-                    LayoutBuilder(
-                      builder: (context, constraints) {
-                        double columnWidth = constraints.maxWidth; // 부모 Column의 가로 크기 가져오기
-
-                        return Container(
-                          height: 14,
-                          decoration: BoxDecoration(border: Border.all(color: Color(etc_color_2),width: 1,style: BorderStyle.solid),borderRadius: BorderRadius.circular(50)),
-                          padding: EdgeInsets.zero,
-                          width: columnWidth*90/100, // 부모 Column의 가로 크기로 설정
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AutoSizeText("교과성적",style: TextStyle(fontSize: 11,color: Color(font_color_2))),
-                    AutoSizeText("100%",style: TextStyle(fontSize: 11,color: Color(font_color_2))),
-                  ],
-                ),
+                AdmissionUnit("경영학과",30,3.78,2.93,24),
               ],
             ),
           )
         ])
+    );
+  }
+}
+
+//모집전형 블럭
+class AdmissionUnit extends StatelessWidget {
+  final String unit;
+  final int recruit;
+  final double grade;
+  final double o_grade;
+  final double rate;
+  const AdmissionUnit(this.unit,this.recruit,this.grade,this.o_grade,this.rate,{Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AutoSizeText("${unit}(${recruit})",style: TextStyle(fontSize: 12,fontWeight: medium),),
+        SizedBox(height: 2,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AutoSizeText("${grade}",style: TextStyle(fontSize: 11,color: Color(etc_color_3)),),
+            AutoSizeText("${o_grade}",style: TextStyle(fontSize: 11,color: Color(etc_color_2)),),
+            AutoSizeText("${rate.toInt()}:1",style: TextStyle(fontSize: 11),),
+          ],
+        ),
+        Stack(
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) {
+                double columnWidth = constraints.maxWidth; // 부모 Column의 가로 크기 가져오기
+                return LinearPercentIndicator(
+                  padding: EdgeInsets.zero,
+                  width: columnWidth, // 부모 Column의 가로 크기로 설정
+                  lineHeight: 14.0, // 게이지 바의 높이
+                  percent: (9-grade)/8, // 퍼센트 값 (0.0부터 1.0까지)
+                  backgroundColor: Color(etc_color_1), // 게이지 바의 배경색
+                  progressColor: Color(btn_background), // 게이지 바의 진행색
+                  barRadius: Radius.circular(50),
+                );
+              },
+            ),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                double columnWidth = constraints.maxWidth; // 부모 Column의 가로 크기 가져오기
+
+                return Container(
+                  height: 14,
+                  decoration: BoxDecoration(border: Border.all(color: Color(etc_color_2),width: 1,style: BorderStyle.solid),borderRadius: BorderRadius.circular(50)),
+                  padding: EdgeInsets.zero,
+                  width: columnWidth*(9-o_grade)/8, // 부모 Column의 가로 크기로 설정
+                );
+              },
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AutoSizeText("교과성적",style: TextStyle(fontSize: 11,color: Color(font_color_2))),
+            AutoSizeText("100%",style: TextStyle(fontSize: 11,color: Color(font_color_2))),
+          ],
+        ),
+      ],
     );
   }
 }
