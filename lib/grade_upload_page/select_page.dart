@@ -1,19 +1,20 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:aiia/grade_upload_page/satPage.dart';
-import 'package:aiia/grade_upload_page/schPage.dart';
+import 'package:aiia/grade_upload_page/jeongsi_upload_page.dart';
+import 'package:aiia/grade_upload_page/susi_upload_page.dart';
 
-import 'package:aiia/config.dart';
+import 'package:aiia/config/variables.dart';
 
 import '../main_page/layout.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class SelectPage extends StatefulWidget {
+  const SelectPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainIntroductionPageState();
+  State<SelectPage> createState() => _SelectPageState();
 }
 
-class _MainIntroductionPageState extends State<MainPage> {
+class _SelectPageState extends State<SelectPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +55,7 @@ class _MainIntroductionPageState extends State<MainPage> {
                           child: Container(
                             padding: EdgeInsets.fromLTRB(0, 17, 0, 0),
                             alignment: Alignment.topCenter,
-                            child: Text(
+                            child: AutoSizeText(
                               "시험을 선택하세요.",
                               style: TextStyle(
                                 color: Colors.black,
@@ -120,7 +121,7 @@ class _MainIntroductionPageState extends State<MainPage> {
                                         ),
                                       );
                                     },
-                                    child: Text(
+                                    child: AutoSizeText(
                                       '교과',
                                       style: TextStyle(
                                           color: Color(0xFFFFFFFF),
@@ -185,7 +186,7 @@ class _MainIntroductionPageState extends State<MainPage> {
                                         ),
                                       );
                                     },
-                                    child: Text(
+                                    child: AutoSizeText(
                                       '수능',
                                       style: TextStyle(
                                           color: Color(0xFFFFFFFF),

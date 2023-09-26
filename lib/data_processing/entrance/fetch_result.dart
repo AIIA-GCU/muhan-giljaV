@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:aiia/model/JeongsiResult.dart';
-import 'package:aiia/model/SusiResult.dart';
+import 'package:aiia/data_processing/entrance/model/jeongsi_result.dart';
+import 'package:aiia/data_processing/entrance/model/susi_result.dart';
 
 const BASE_URL = "https://aiia-gcu.github.io/Muhan-giljabi/api/";
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class AddAverage extends StatefulWidget {
   const AddAverage({super.key});
@@ -6,7 +7,6 @@ class AddAverage extends StatefulWidget {
   @override
   State<AddAverage> createState() => _AddAverageState();
 }
-
 class _AddAverageState extends State<AddAverage> {
   String selectedDropdownItem1 = "대학을 선택하세요";
   String selectedDropdownItem2 = "학부/학과를 선택하세요";
@@ -43,7 +43,7 @@ class _AddAverageState extends State<AddAverage> {
                         SizedBox(width: 8),
                         Column(
                           children: [
-                            Text(
+                            AutoSizeText(
                               'Add Average',
                               style: TextStyle(
                                 fontSize: 20,
@@ -78,7 +78,7 @@ class _AddAverageState extends State<AddAverage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   selectedDropdownItem1,
                                   style: TextStyle(
                                     fontSize: 17,
@@ -109,7 +109,7 @@ class _AddAverageState extends State<AddAverage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   selectedDropdownItem2,
                                   style: TextStyle(
                                     fontSize: 17,
@@ -139,7 +139,7 @@ class _AddAverageState extends State<AddAverage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   selectedOptions.length == 0
                                       ? dropdownTitle3
                                       : selectedOptions.length == 1
@@ -170,7 +170,7 @@ class _AddAverageState extends State<AddAverage> {
                             ),
                             child: ElevatedButton(
                               onPressed: () {},
-                              child: Text('등록하기'),
+                              child: AutoSizeText('등록하기'),
                             ),
                           ),
                         ),//등록하기 버튼
@@ -194,7 +194,7 @@ class _AddAverageState extends State<AddAverage> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text("가천리버럴아츠칼리지"),
+                      title: AutoSizeText("가천리버럴아츠칼리지"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem1 = "가천리버럴아츠칼리지";
@@ -204,7 +204,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("경영대학"),
+                      title: AutoSizeText("경영대학"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem1 = "경영대학";
@@ -214,7 +214,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("사회과학대학"),
+                      title: AutoSizeText("사회과학대학"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem1 = "사회과학대학";
@@ -224,7 +224,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("인문대학"),
+                      title: AutoSizeText("인문대학"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem1 = "인문대학";
@@ -234,7 +234,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("법과대학"),
+                      title: AutoSizeText("법과대학"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem1 = "법과대학";
@@ -244,7 +244,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("IT융합대학"),
+                      title: AutoSizeText("IT융합대학"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem1 = "IT융합대학";
@@ -270,7 +270,7 @@ class _AddAverageState extends State<AddAverage> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text("AI.소프트웨어 학부"),
+                      title: AutoSizeText("AI.소프트웨어 학부"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem2 = "AI.소프트웨어 학부";
@@ -280,7 +280,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("컴퓨터공학부"),
+                      title: AutoSizeText("컴퓨터공학부"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem2 = "컴퓨터공학부";
@@ -290,7 +290,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("전자공학부"),
+                      title: AutoSizeText("전자공학부"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem2 = "전자공학부";
@@ -300,7 +300,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("전기공학과"),
+                      title: AutoSizeText("전기공학과"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem2 = "전기공학과";
@@ -310,7 +310,7 @@ class _AddAverageState extends State<AddAverage> {
                       },
                     ),
                     ListTile(
-                      title: Text("스마트시티융합학과"),
+                      title: AutoSizeText("스마트시티융합학과"),
                       onTap: () {
                         setState(() {
                           selectedDropdownItem2 = "스마트시티융합학과";
@@ -336,7 +336,7 @@ class _AddAverageState extends State<AddAverage> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text("교과우수"),
+                      title: AutoSizeText("교과우수"),
                       trailing: Checkbox(
                         value: selectedOptions.contains("교과우수"),
                         onChanged: (value) {
@@ -353,7 +353,7 @@ class _AddAverageState extends State<AddAverage> {
                       ),
                     ),
                     ListTile(
-                      title: Text("가천바람개비"),
+                      title: AutoSizeText("가천바람개비"),
                       trailing: Checkbox(
                         value: selectedOptions.contains("가천바람개비"),
                         onChanged: (value) {
@@ -370,7 +370,7 @@ class _AddAverageState extends State<AddAverage> {
                       ),
                     ),
                     ListTile(
-                      title: Text("농어촌"),
+                      title: AutoSizeText("농어촌"),
                       trailing: Checkbox(
                         value: selectedOptions.contains("농어촌"),
                         onChanged: (value) {

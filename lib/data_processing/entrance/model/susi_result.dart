@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'SusiResult.g.dart';
+part 'susi_result.g.dart';
 
 @JsonSerializable()
 class SusiResult {

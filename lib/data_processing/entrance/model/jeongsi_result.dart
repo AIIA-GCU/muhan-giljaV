@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'JeongsiResult.g.dart';
+part 'jongsi_result.g.dart';
 
 @JsonSerializable()
 class JeongsiResult {

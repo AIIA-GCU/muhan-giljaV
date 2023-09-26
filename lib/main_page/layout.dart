@@ -4,35 +4,21 @@
 /// - 위젯은 모두 같은 크기
 ///
 
-import 'package:aiia/config.dart';
+import 'package:aiia/config/variables.dart';
 import 'package:aiia/main_page/add_average.dart';
 import 'package:aiia/main_page/my_grade.dart';
-import 'package:aiia/main_page/major_info.dart';
+import 'package:aiia/main_page/entrance_chart.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
 
-class HomeLayout extends StatefulWidget {
+class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key});
-
-  @override
-  State<HomeLayout> createState() => _HomeLayoutState();
-}
-
-class _HomeLayoutState extends State<HomeLayout> {
-
-  // 입시 결과표 리스트
-  List<Widget> _children = [MajorInfo()];
-
-  // 설정 페이지 이동
-  void _migratePage() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Container()));
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(/*color: Colors.pink,*/
+        body: Container(
             child: SafeArea(
                 child: Column(children: [
       // 상단 메뉴
@@ -42,13 +28,14 @@ class _HomeLayoutState extends State<HomeLayout> {
               margin: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
               child: Stack(children: [
                 // 타이틀
-                Positioned(top: 0, left: 0, child: Text("무한길잡이")),
+                Positioned(top: 0, left: 0, child: AutoSizeText("무한길잡이")),
                 // 햄버거 메뉴 아이콘
                 Positioned(
                     top: 0,
                     right: 0,
                     child: GestureDetector(
-                      onTap: _migratePage,
+                      onTap: () => Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => Container())),
                       child: Icon(CustomIcon.hamburger_menu,
                           size: 18, color: Color(font_color_1)),
                     ))
@@ -61,7 +48,7 @@ class _HomeLayoutState extends State<HomeLayout> {
           // My Grade 위젯 - 이현
           MyGrade(),
           // 입시 결과표 위젯 - 호성
-          Column(children: _children),
+          EntranceChart(),
           // 표 생성 위젯 - 승우
           AddAverage()
         ])),

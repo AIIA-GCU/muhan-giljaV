@@ -1,42 +1,46 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'JeongsiResult.dart';
+part of 'susi_result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-JeongsiResult _$JeongsiResultFromJson(Map<String, dynamic> json) {
+SusiResult _$SusiResultFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
     requiredKeys: const [
       'department',
       'examination',
-      'group',
       'ratio',
       'capacity',
-      'cutLine',
+      'cutLine70',
+      'cutLine90',
       'reverseNumber'
     ],
   );
-  return JeongsiResult(
+  return SusiResult(
     department: json['department'] as String,
     examination: json['examination'] as String,
-    group: json['group'] as String,
     ratio: (json['ratio'] as num).toDouble(),
     capacity: json['capacity'] as int,
-    cutLine: (json['cutLine'] as num).toDouble(),
+    cutLine70: (json['cutLine70'] as num).toDouble(),
+    cutLine90: (json['cutLine90'] as num).toDouble(),
+    essayCutLine70: (json['essayCutLine70'] as num?)?.toDouble() ?? -1,
+    essayCutLine90: (json['essayCutLine90'] as num?)?.toDouble() ?? -1,
     reverseNumber: json['reverseNumber'] as int,
   );
 }
 
-Map<String, dynamic> _$JeongsiResultToJson(JeongsiResult instance) =>
+Map<String, dynamic> _$SusiResultToJson(SusiResult instance) =>
     <String, dynamic>{
       'department': instance.department,
       'examination': instance.examination,
-      'group': instance.group,
       'ratio': instance.ratio,
       'capacity': instance.capacity,
-      'cutLine': instance.cutLine,
+      'cutLine70': instance.cutLine70,
+      'cutLine90': instance.cutLine90,
+      'essayCutLine70': instance.essayCutLine70,
+      'essayCutLine90': instance.essayCutLine90,
       'reverseNumber': instance.reverseNumber,
     };

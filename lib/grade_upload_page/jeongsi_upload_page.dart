@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:aiia/config.dart';
+import 'package:aiia/config/variables.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'mainPage.dart';
+import 'select_page.dart';
 
 class SATPage extends StatefulWidget {
   const SATPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class SATPage extends StatefulWidget {
 class _SATPageState extends State<SATPage> {
 
   String url = " "; // 수능 성적표 사진 표시를 위한 파일 주소
-  bool suNeungPngOn = false;
+  bool jeongsiPngOn = false;
 
   //수능 성적표 헤드 부분
   Widget tableHeadText(String id) {
@@ -24,7 +25,7 @@ class _SATPageState extends State<SATPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          AutoSizeText(
             id,
             style: TextStyle(
               fontSize: font_size[4],
@@ -44,7 +45,7 @@ class _SATPageState extends State<SATPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          AutoSizeText(
             id,
             style: wrote
                 ? TextStyle(
@@ -91,25 +92,19 @@ class _SATPageState extends State<SATPage> {
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
                       alignment: Alignment.center,
-                      color: suNeungPngOn
+                      color: jeongsiPngOn
                           ? Colors.black.withOpacity(0.2)
                           : Colors.black.withOpacity(0.0),
                     ),
                   ),
                 ),
               ),
-              // Image(
-              //   width: double.infinity,
-              //   height: double.infinity,
-              //   image: AssetImage(url),
-              //   fit: BoxFit.fitWidth,
-              // ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
                     onTap: () {
-                      suNeungPngOn ?
+                      jeongsiPngOn ?
                       // 수능 성적표 사진 표시를 위한 함수, 버튼 클릭 시 이 함수를 실행해 url 주소를 입력함
                       setState(() {
                         url = "assets/images/suneung.jpg";
@@ -120,18 +115,18 @@ class _SATPageState extends State<SATPage> {
                       CustomIcon.camera,
                       size: 62,
                       color:
-                      suNeungPngOn ? Color(0xffFFFFFF) : Color(btn_background),
+                      jeongsiPngOn ? Color(0xffFFFFFF) : Color(btn_background),
                     ),
                   ),
                   Container(
                     height: 10,
                   ),
-                  Text(
+                  AutoSizeText(
                     "성적 업로드",
                     style: TextStyle(
                       fontWeight: medium,
                       fontSize: font_size[4],
-                      color: suNeungPngOn
+                      color: jeongsiPngOn
                           ? Color(0xffFFFFFF)
                           : Color(btn_background),
                     ),
@@ -164,6 +159,7 @@ class _SATPageState extends State<SATPage> {
           padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
           child: Column(
             children: [
+              // 앱바
               Container(
                 alignment: Alignment.centerLeft,
                 child: Transform.translate(
@@ -176,18 +172,11 @@ class _SATPageState extends State<SATPage> {
                     onPressed: () {
                       Navigator.of(context).pop(
                         PageRouteBuilder(
-                          transitionsBuilder:
-                          // secondaryAnimation: 화면 전화시 사용되는 보조 애니메이션효과
-                          // child: 화면이 전환되는 동안 표시할 위젯을 의미(즉, 전환 이후 표시될 위젯 정보를 의미)
-                              (context, animation, secondaryAnimation,
-                              child) {
-                            // Offset에서 x값 1은 오른쪽 끝 y값 1은 아래쪽 끝을 의미한다.
-                            // 애니메이션이 시작할 포인트 위치를 의미한다.
+                          // 슬라이드 애니메이션
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
                             var begin = const Offset(-1.0, 0);
                             var end = Offset.zero;
-                            // Curves.ease: 애니메이션이 부드럽게 동작하도록 명령
                             var curve = Curves.ease;
-                            // 애니메이션의 시작과 끝을 담당한다.
                             var tween = Tween(
                               begin: begin,
                               end: end,
@@ -201,13 +190,9 @@ class _SATPageState extends State<SATPage> {
                               child: child,
                             );
                           },
-                          // 함수를 통해 Widget을 pageBuilder에 맞는 형태로 반환하게 해야한다.
-                          pageBuilder: (context, animation,
-                              secondaryAnimation) =>
-                          // (DetailScreen은 Stateless나 Stateful 위젯으로된 화면임)
-                          MainPage(),
-                          // 이것을 true로 하면 dialog로 취급한다.
-                          // 기본값은 false
+                          // 이동할 페이지
+                          pageBuilder: (context, animation, secondaryAnimation) => SelectPage(),
+                          // Dialog로 취급 안함
                           fullscreenDialog: false,
                         ),
                       );
@@ -216,6 +201,7 @@ class _SATPageState extends State<SATPage> {
                 ),
               ),
               SizedBox(height: 12),
+              // 사진 업로드 위젯
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
@@ -226,7 +212,7 @@ class _SATPageState extends State<SATPage> {
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 17, 0, 0),
                       alignment: Alignment.topCenter,
-                      child: Text(
+                      child: AutoSizeText(
                         "수능",
                         style: TextStyle(
                           color: Colors.black,
@@ -252,6 +238,7 @@ class _SATPageState extends State<SATPage> {
               Container(
                 height: 15,
               ),
+              // 이미지 분석표 위젯
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
@@ -271,7 +258,7 @@ class _SATPageState extends State<SATPage> {
                             width: 4,
                           ),
                           // 이름
-                          Text(
+                          AutoSizeText(
                             "수능",
                             style: TextStyle(
                               fontWeight: medium,
@@ -349,6 +336,7 @@ class _SATPageState extends State<SATPage> {
               Container(
                 height: 15,
               ),
+              // 산출 결과 위젯
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
@@ -368,7 +356,7 @@ class _SATPageState extends State<SATPage> {
                             width: 4,
                           ),
                           // 이름
-                          Text(
+                          AutoSizeText(
                             "산출결과",
                             style: TextStyle(
                               fontWeight: medium,
@@ -415,5 +403,45 @@ class _SATPageState extends State<SATPage> {
         ),
       ]),
     );
+  }
+}
+
+class main_w extends StatelessWidget {
+  const main_w({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      w1(),
+      w2()
+    ]);
+  }
+}
+
+class w1 extends StatefulWidget {
+  const w1({super.key});
+
+  @override
+  State<w1> createState() => _w1State();
+}
+
+class _w1State extends State<w1> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class w2 extends StatefulWidget {
+  const w2({super.key});
+
+  @override
+  State<w2> createState() => _w2State();
+}
+
+class _w2State extends State<w2> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

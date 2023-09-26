@@ -1,6 +1,11 @@
 import 'package:flutter/widgets.dart';
 
 ///
+/// 크기
+///
+late final Size device_size;
+
+///
 /// 색상
 ///
 const int app_background = 0xFFF8F8FA;
@@ -27,6 +32,7 @@ const FontWeight regular = FontWeight.w300;
 
 ///
 /// 아이콘
+/// - 디자인에 사용된 위젯은 모두 있음
 /// - 사용법 : Icon(CustomIcon.~~~)
 ///
 class CustomIcon {

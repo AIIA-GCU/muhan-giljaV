@@ -4,11 +4,11 @@
 /// - 아이콘 추가해야 함
 ///
 
-import 'package:aiia/config.dart';
+import 'package:aiia/config/variables.dart';
+import 'package:aiia/grade_upload_page/select_page.dart';
 
 import 'package:flutter/material.dart';
-
-import '../grade_upload_page/mainPage.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class MyGrade extends StatefulWidget {
   const MyGrade({super.key});
@@ -18,29 +18,23 @@ class MyGrade extends StatefulWidget {
 }
 
 class _MyGradeState extends State<MyGrade> {
-  bool isUpload = false; // 성적 업로드를 했는가?
+  bool isUpload = false;
 
-  List<double> avgs = [0.0, 0.0, 0.0]; // 학년별 평균
-  double total_avg = 0.0; // 전체 학년 평균
-  double reuslt = 0.0; // 가천대식 평균
+  // 성적 관련 변수
+  // 위에서부터 학년별 평균, 전체 평균, 산출 결과
+  List<double> avgs = [0.0, 0.0, 0.0];
+  double total_avg = 0.0;
+  double reuslt = 0.0;
 
   // 성적 업로드 페이지 이동
   void _migratePage() {
-
     Navigator.of(context).push(
       PageRouteBuilder(
-        transitionsBuilder:
-        // secondaryAnimation: 화면 전화시 사용되는 보조 애니메이션효과
-        // child: 화면이 전환되는 동안 표시할 위젯을 의미(즉, 전환 이후 표시될 위젯 정보를 의미)
-            (context, animation,
-            secondaryAnimation, child) {
-          // Offset에서 x값 1은 오른쪽 끝 y값 1은 아래쪽 끝을 의미한다.
-          // 애니메이션이 시작할 포인트 위치를 의미한다.
+        // 슬라이드 애니메이션
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var begin = const Offset(-1.0, 0);
           var end = Offset.zero;
-          // Curves.ease: 애니메이션이 부드럽게 동작하도록 명령
           var curve = Curves.ease;
-          // 애니메이션의 시작과 끝을 담당한다.
           var tween = Tween(
             begin: begin,
             end: end,
@@ -55,13 +49,9 @@ class _MyGradeState extends State<MyGrade> {
             child: child,
           );
         },
-        // 함수를 통해 Widget을 pageBuilder에 맞는 형태로 반환하게 해야한다.
-        pageBuilder: (context, animation,
-            secondaryAnimation) =>
-        // (DetailScreen은 Stateless나 Stateful 위젯으로된 화면임)
-        MainPage(),
-        // 이것을 true로 하면 dialog로 취급한다.
-        // 기본값은 false
+        // 이동할 페이지
+        pageBuilder: (context, animation, secondaryAnimation) => SelectPage(),
+        // Dialog로 취급 안함
         fullscreenDialog: false,
       ),
     );
@@ -89,7 +79,7 @@ class _MyGradeState extends State<MyGrade> {
                         children: [
                           Icon(CustomIcon.document, size: 22, color: Color(btn_background)),
                           SizedBox(width: 4,),
-                          Text("My Grade",
+                          AutoSizeText("My Grade",
                               style: TextStyle(
                                   fontWeight: medium,
                                   fontSize: font_size[4],
@@ -110,16 +100,13 @@ class _MyGradeState extends State<MyGrade> {
                                   size: 20, color: Color(btn_background))))
                   ])),
               // 구분선
-              //Divider위젯은 기본 마진값이 있어서 밑 내용들에 위치를 잡기 힘들어 Container로 대체합니다.
               Container(height: 1,margin: EdgeInsets.only(left: 0,top: 11,right: 0,bottom: 0),color: Color(line_color)),
-
               // 성적
               Expanded(
                   child: isUpload
                       // 성적이 업로드 된 경우
                       ? Container(
-                      margin:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                           child: Column(children: [
                             Container(
                               padding: EdgeInsets.only(bottom: 11),
@@ -129,36 +116,36 @@ class _MyGradeState extends State<MyGrade> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Column(children: [
-                                      Text("1",
+                                      AutoSizeText("1",
                                           style: TextStyle(
                                               fontWeight: regular,
                                               fontSize: font_size[1],
                                               color: Color(font_color_2))),
-                                      Text(avgs[0].toString(),
+                                      AutoSizeText(avgs[0].toString(),
                                           style: TextStyle(
                                               fontWeight: bold,
                                               fontSize: font_size[3],
                                               color: Color(font_color_1)))
                                     ]),
                                     Column(children: [
-                                      Text("2",
+                                      AutoSizeText("2",
                                           style: TextStyle(
                                               fontWeight: regular,
                                               fontSize: font_size[1],
                                               color: Color(font_color_2))),
-                                      Text(avgs[1].toString(),
+                                      AutoSizeText(avgs[1].toString(),
                                           style: TextStyle(
                                               fontWeight: bold,
                                               fontSize: font_size[3],
                                               color: Color(font_color_1)))
                                     ]),
                                     Column(children: [
-                                      Text("3",
+                                      AutoSizeText("3",
                                           style: TextStyle(
                                               fontWeight: regular,
                                               fontSize: font_size[1],
                                               color: Color(font_color_2))),
-                                      Text(avgs[2].toString(),
+                                      AutoSizeText(avgs[2].toString(),
                                           style: TextStyle(
                                               fontWeight: bold,
                                               fontSize: font_size[3],
@@ -183,12 +170,12 @@ class _MyGradeState extends State<MyGrade> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text("나의 총 평균",
+                                        AutoSizeText("나의 총 평균",
                                             style: TextStyle(
                                                 fontWeight: regular,
                                                 fontSize: font_size[1],
                                                 color: Color(font_color_2))),
-                                        Text(total_avg.toString(),
+                                        AutoSizeText(total_avg.toString(),
                                             style: TextStyle(
                                                 fontWeight: bold,
                                                 fontSize: font_size[5],
@@ -203,12 +190,12 @@ class _MyGradeState extends State<MyGrade> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text("가천대식 평균",
+                                        AutoSizeText("가천대식 평균",
                                             style: TextStyle(
                                                 fontWeight: regular,
                                                 fontSize: font_size[1],
                                                 color: Color(font_color_2))),
-                                        Text(reuslt.toString(),
+                                        AutoSizeText(reuslt.toString(),
                                             style: TextStyle(
                                                 fontWeight: bold,
                                                 fontSize: font_size[5],

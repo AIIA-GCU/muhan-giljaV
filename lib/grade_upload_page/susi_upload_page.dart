@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:aiia/config.dart';
+import 'package:aiia/config/variables.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'mainPage.dart';
+import 'select_page.dart';
 import 'dart:math' as math;
 
 class SCHPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class SCHPage extends StatefulWidget {
 
 class _SCHPageState extends State<SCHPage> {
   String url = " "; // 교과 성적표 사진 표시를 위한 파일 주소
-  bool suSiPngOn = false;
+  bool susiPngOn = false;
   List grade = ['1학년 1학기', '1학년 2학기', '2학년 1학기', '2학년 2학기', '3학년 1학기'];
   int gradeSelector = 0;
 
@@ -26,7 +27,7 @@ class _SCHPageState extends State<SCHPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          AutoSizeText(
             id,
             style: TextStyle(
               fontSize: font_size[4],
@@ -46,7 +47,7 @@ class _SCHPageState extends State<SCHPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          AutoSizeText(
             id,
             style: wrote
                 ? TextStyle(
@@ -88,12 +89,11 @@ class _SCHPageState extends State<SCHPage> {
                   ),
                 ),
                 child: ClipRRect(
-                  // make sure we apply clip it properly
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
                       alignment: Alignment.center,
-                      color: suSiPngOn
+                      color: susiPngOn
                           ? Colors.black.withOpacity(0.2)
                           : Colors.black.withOpacity(0.0),
                     ),
@@ -111,30 +111,25 @@ class _SCHPageState extends State<SCHPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      suSiPngOn ?
-                      // 수능 성적표 사진 표시를 위한 함수, 버튼 클릭 시 이 함수를 실행해 url 주소를 입력함
-                      setState(() {
-                        url = "assets/images/suneung.jpg";
-                      })
-                      : showToast(); // 성적표 사진이 업로드 되지 않을 경우 토스트 메세지 출력
+                      susiPngOn
+                          ? setState(() => url = "assets/images/suneung.jpg")
+                          : showToast();
                     },
                     child: Icon(
                       CustomIcon.camera,
                       size: 62,
-                      color:
-                          suSiPngOn ? Color(0xffFFFFFF) : Color(btn_background),
+                      color: susiPngOn ? Color(0xffFFFFFF) : Color(btn_background),
                     ),
                   ),
                   Container(
                     height: 10,
                   ),
-                  Text(
+                  AutoSizeText(
                     "성적 업로드",
                     style: TextStyle(
                       fontWeight: medium,
                       fontSize: font_size[4],
-                      color:
-                          suSiPngOn ? Color(0xffFFFFFF) : Color(btn_background),
+                      color: susiPngOn ? Color(0xffFFFFFF) : Color(btn_background),
                     ),
                   ),
                 ],
@@ -255,6 +250,7 @@ class _SCHPageState extends State<SCHPage> {
           padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
           child: Column(
             children: [
+              // 앱 바
               Container(
                 alignment: Alignment.centerLeft,
                 child: Transform.translate(
@@ -267,17 +263,11 @@ class _SCHPageState extends State<SCHPage> {
                     onPressed: () {
                       Navigator.of(context).pop(
                         PageRouteBuilder(
-                          transitionsBuilder:
-                              // secondaryAnimation: 화면 전화시 사용되는 보조 애니메이션효과
-                              // child: 화면이 전환되는 동안 표시할 위젯을 의미(즉, 전환 이후 표시될 위젯 정보를 의미)
-                              (context, animation, secondaryAnimation, child) {
-                            // Offset에서 x값 1은 오른쪽 끝 y값 1은 아래쪽 끝을 의미한다.
-                            // 애니메이션이 시작할 포인트 위치를 의미한다.
+                          // 슬라이드 애니메이션
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
                             var begin = const Offset(-1.0, 0);
                             var end = Offset.zero;
-                            // Curves.ease: 애니메이션이 부드럽게 동작하도록 명령
                             var curve = Curves.ease;
-                            // 애니메이션의 시작과 끝을 담당한다.
                             var tween = Tween(
                               begin: begin,
                               end: end,
@@ -291,13 +281,9 @@ class _SCHPageState extends State<SCHPage> {
                               child: child,
                             );
                           },
-                          // 함수를 통해 Widget을 pageBuilder에 맞는 형태로 반환하게 해야한다.
-                          pageBuilder: (context, animation,
-                                  secondaryAnimation) =>
-                              // (DetailScreen은 Stateless나 Stateful 위젯으로된 화면임)
-                              MainPage(),
-                          // 이것을 true로 하면 dialog로 취급한다.
-                          // 기본값은 false
+                          // 이동할 페이지
+                          pageBuilder: (context, animation, secondaryAnimation) => SelectPage(),
+                          // Dialog로 취급 안함
                           fullscreenDialog: false,
                         ),
                       );
@@ -308,6 +294,7 @@ class _SCHPageState extends State<SCHPage> {
               Container(
                 height: 12,
               ),
+              // 이미지 업로드 위젯
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
@@ -318,7 +305,7 @@ class _SCHPageState extends State<SCHPage> {
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 17, 0, 0),
                       alignment: Alignment.topCenter,
-                      child: Text(
+                      child: AutoSizeText(
                         "교과",
                         style: TextStyle(
                           color: Colors.black,
@@ -343,6 +330,7 @@ class _SCHPageState extends State<SCHPage> {
               Container(
                 height: 15,
               ),
+              // 이미지 분석표 위젯
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
@@ -366,7 +354,7 @@ class _SCHPageState extends State<SCHPage> {
                                   width: 4,
                                 ),
                                 // 이름
-                                Text(
+                                AutoSizeText(
                                   grade[gradeSelector],
                                   style: TextStyle(
                                     fontWeight: medium,
@@ -570,6 +558,7 @@ class _SCHPageState extends State<SCHPage> {
               Container(
                 height: 15,
               ),
+              // 산출 결과 위젯
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
@@ -589,7 +578,7 @@ class _SCHPageState extends State<SCHPage> {
                             width: 4,
                           ),
                           // 이름
-                          Text(
+                          AutoSizeText(
                             "산출 결과",
                             style: TextStyle(
                               fontWeight: medium,

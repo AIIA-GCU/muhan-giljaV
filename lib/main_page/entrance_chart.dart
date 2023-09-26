@@ -1,11 +1,49 @@
+import 'dart:async';
+
+import 'package:aiia/config/variables.dart';
+
 import 'package:flutter/material.dart';
-
-import 'package:aiia/config.dart';
-
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
-class MajorInfo extends StatelessWidget {
-  const MajorInfo({Key? key}) : super(key: key);
+StreamController<bool> sctr = StreamController<bool>.broadcast();
+
+// 입시 결과표
+class EntranceChart extends StatefulWidget {
+  const EntranceChart({super.key});
+
+  @override
+  State<EntranceChart> createState() => _EntranceChartState();
+}
+class _EntranceChartState extends State<EntranceChart> {
+
+  Stream<bool> stream = sctr.stream;
+
+  // 입시 결과표 리스트
+  List<Widget> _children = [Info()];
+
+  void _update(bool b) {
+    setState(() {
+      if (b) _children.add(Info());
+      else _children.removeLast();
+    });
+  }
+
+  @override
+  void initState() {
+    stream.listen((event) => _update(event));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: _children);
+  }
+}
+
+// 정보
+class Info extends StatelessWidget {
+  const Info({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +67,7 @@ class MajorInfo extends StatelessWidget {
                         children: [
                           Icon(CustomIcon.statistic, size: 22, color: Color(btn_background)),
                           SizedBox(width: 4,),
-                          Text("아잉",
+                          AutoSizeText("아잉",
                               style: TextStyle(
                                   fontWeight: medium,
                                   fontSize: font_size[4],
@@ -45,18 +83,17 @@ class MajorInfo extends StatelessWidget {
                         child: Row(
                           children: [
                             InkWell(
-                                onTap: (){},//수정
+                                onTap: () => sctr.add(true),//수정
                                 child: Icon(CustomIcon.edit_rect, size: 22, color: Colors.black)),
                             SizedBox(width: 4,),
                             InkWell(
-                                onTap: (){},//삭제
+                                onTap: () => sctr.add(false),//삭제
                                 child: Icon(CustomIcon.cancel, size: 22, color: Colors.black))
                           ],
                         )
                     )
                   ])
           ),
-          //Divider위젯은 기본 마진값이 있어서 밑 내용들에 위치를 잡기 힘들어 Container로 대체합니다.
           Container(height: 1,margin: EdgeInsets.only(left: 0,top: 11,right: 0,bottom: 0),color: Color(line_color)),
           // 전형
           Container(
@@ -66,14 +103,14 @@ class MajorInfo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('교과성적우수 (30)',style: TextStyle(fontSize: 12,fontWeight: medium),),
+                AutoSizeText('교과성적우수 (30)',style: TextStyle(fontSize: 12,fontWeight: medium),),
                 SizedBox(height: 2,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("00.00",style: TextStyle(fontSize: 11,color: Color(etc_color_3)),),
-                    Text("00.00",style: TextStyle(fontSize: 11,color: Color(etc_color_2)),),
-                    Text("00:00",style: TextStyle(fontSize: 11),),
+                    AutoSizeText("00.00",style: TextStyle(fontSize: 11,color: Color(etc_color_3)),),
+                    AutoSizeText("00.00",style: TextStyle(fontSize: 11,color: Color(etc_color_2)),),
+                    AutoSizeText("00:00",style: TextStyle(fontSize: 11),),
                   ],
                 ),
                 Stack(
@@ -81,7 +118,6 @@ class MajorInfo extends StatelessWidget {
                     LayoutBuilder(
                       builder: (context, constraints) {
                         double columnWidth = constraints.maxWidth; // 부모 Column의 가로 크기 가져오기
-
                         return LinearPercentIndicator(
                           padding: EdgeInsets.zero,
                           width: columnWidth, // 부모 Column의 가로 크기로 설정
@@ -112,8 +148,8 @@ class MajorInfo extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("교과성적",style: TextStyle(fontSize: 11,color: Color(font_color_2))),
-                    Text("100%",style: TextStyle(fontSize: 11,color: Color(font_color_2))),
+                    AutoSizeText("교과성적",style: TextStyle(fontSize: 11,color: Color(font_color_2))),
+                    AutoSizeText("100%",style: TextStyle(fontSize: 11,color: Color(font_color_2))),
                   ],
                 ),
               ],
