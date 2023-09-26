@@ -97,7 +97,7 @@ class Info extends StatelessWidget {
           Container(height: 1,margin: EdgeInsets.only(left: 0,top: 11,right: 0,bottom: 0),color: Color(line_color)),
           // 전형
           Container(
-            height: 56,
+            height: 58,
             margin: EdgeInsets.only(left: 16,top: 16, right: 16, bottom: 0),
             // decoration: BoxDecoration(color: Colors.red),
             child: Column(
@@ -135,11 +135,9 @@ class Info extends StatelessWidget {
 
                         return Container(
                           height: 14,
-
                           decoration: BoxDecoration(border: Border.all(color: Color(etc_color_2),width: 1,style: BorderStyle.solid),borderRadius: BorderRadius.circular(50)),
                           padding: EdgeInsets.zero,
                           width: columnWidth*90/100, // 부모 Column의 가로 크기로 설정
-
                         );
                       },
                     ),

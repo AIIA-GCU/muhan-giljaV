@@ -18,41 +18,34 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(app_background),
+          elevation: 0,
+          title: Text("무한길잡이",style: TextStyle(color: Color(font_color_1),fontSize: 16),),
+          actions: [
+            IconButton(
+              icon: Icon(CustomIcon.hamburger_menu, size: 18, color: Color(font_color_1),),
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Container())),
+                // 햄버거 버튼이 눌렸을 때 수행할 동작을 여기에 작성합니다.
+            ),
+          ],
+        ),
         body: Container(
             child: SafeArea(
-                child: Column(children: [
-      // 상단 메뉴
-      Flexible(
-          flex: 1,
-          child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-              child: Stack(children: [
-                // 타이틀
-                Positioned(top: 0, left: 0, child: AutoSizeText("무한길잡이")),
-                // 햄버거 메뉴 아이콘
-                Positioned(
-                    top: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: () => Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => Container())),
-                      child: Icon(CustomIcon.hamburger_menu,
-                          size: 18, color: Color(font_color_1)),
-                    ))
-              ]))),
-      // 메인 페이지
-      Flexible(
-        flex: 12,
-        child: SingleChildScrollView(
-            child: Column(children: [
-          // My Grade 위젯 - 이현
-          MyGrade(),
-          // 입시 결과표 위젯 - 호성
-          EntranceChart(),
-          // 표 생성 위젯 - 승우
-          AddAverage()
-        ])),
-      )
-    ]))));
+                child: SingleChildScrollView(
+                    child: Column(
+                        children: [
+                        // My Grade 위젯 - 이현
+                        MyGrade(),
+                        // 입시 결과표 위젯 - 호성
+                        EntranceChart(),
+                        // 표 생성 위젯 - 승우
+                        AddAverage()
+                      ]
+                    )
+                )
+            )
+        )
+    );
   }
 }
