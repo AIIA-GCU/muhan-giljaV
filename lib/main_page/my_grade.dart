@@ -4,6 +4,7 @@
 /// - 아이콘 추가해야 함
 ///
 
+import 'package:aiia/config/animation.dart';
 import 'package:aiia/config/variables.dart';
 import 'package:aiia/grade_upload_page/select_page.dart';
 
@@ -30,28 +31,8 @@ class _MyGradeState extends State<MyGrade> {
   void _migratePage() {
     Navigator.of(context).push(
       PageRouteBuilder(
-        // 슬라이드 애니메이션
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = const Offset(-1.0, 0);
-          var end = Offset.zero;
-          var curve = Curves.ease;
-          var tween = Tween(
-            begin: begin,
-            end: end,
-          ).chain(
-            CurveTween(
-              curve: curve,
-            ),
-          );
-          return SlideTransition(
-            position:
-            animation.drive(tween),
-            child: child,
-          );
-        },
-        // 이동할 페이지
+        transitionsBuilder: slideLeft2Right,
         pageBuilder: (context, animation, secondaryAnimation) => SelectPage(),
-        // Dialog로 취급 안함
         fullscreenDialog: false,
       ),
     );
@@ -204,11 +185,13 @@ class _MyGradeState extends State<MyGrade> {
                                 ]))
                           ]))
                       // 성적이 업로드 되지 않은 경우
-                      : Center(
-                          child: GestureDetector(
-                              onTap: _migratePage,
-                              child: Icon(CustomIcon.add,
-                                  size: 52, color: Color(btn_background)))))
+                      : GestureDetector(
+                          onTap: _migratePage,
+                          child: Container(
+                              color: Color(app_background),
+                              child: Center(
+                                  child: Icon(CustomIcon.add, size: 56, color: Color(btn_background)))))
+              )
             ])));
   }
 }

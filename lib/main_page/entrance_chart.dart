@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:aiia/config/variables.dart';
 
@@ -7,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-StreamController<bool> sctr = StreamController<bool>.broadcast();
+StreamController<Map<String, List<String>>> chart_sctr = StreamController<Map<String, List<String>>>.broadcast();
 
 // 입시 결과표
 class EntranceChart extends StatefulWidget {
@@ -18,21 +17,28 @@ class EntranceChart extends StatefulWidget {
 }
 class _EntranceChartState extends State<EntranceChart> {
 
-  Stream<bool> stream = sctr.stream;
+  Stream<Map<String, List<String>>> stream = chart_sctr.stream;
 
   // 입시 결과표 리스트
-  List<Widget> _children = [Info()];
+  List<Widget> _children = [];
 
-  void _update(bool b) {
+  // 업데이트
+  void update(Map<String, List<String>> m) {
     setState(() {
-      if (b) _children.add(Info());
-      else _children.removeLast();
+      String depart = m.keys.first;
+      if (depart == "remove")
+        _children.removeWhere((element) => element.key.toString() == m[depart]!.first);
+      else _children.add(Info(
+          key: UniqueKey(),
+          department: depart,
+          examinations: m[depart]!
+      ));
     });
   }
 
   @override
   void initState() {
-    stream.listen((event) => _update(event));
+    stream.listen((event) => update(event));
     super.initState();
   }
 
@@ -44,13 +50,24 @@ class _EntranceChartState extends State<EntranceChart> {
 
 // 정보
 class Info extends StatelessWidget {
-  const Info({Key? key}) : super(key: key);
+  const Info({
+    Key? key,
+    required this.department,
+    required this.examinations
+  }) : super(key: key);
+
+  final String department;
+  final List<String> examinations;
 
   @override
   Widget build(BuildContext context) {
+    print(examinations);
+    List<Widget> children = examinations
+        .map((e) =>  AdmissionUnit(e,30,3.78,2.93,24))
+        .toList();
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 24, vertical: 6),
-        padding: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 16),
+        padding: EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Color(widget_background)),
@@ -60,7 +77,7 @@ class Info extends StatelessWidget {
               height: 34,
               child: Stack(
                   children: [
-                    // 아이콘
+                    // 학부&학과명
                     Positioned(
                       top: 11,
                       left: 11,
@@ -68,7 +85,7 @@ class Info extends StatelessWidget {
                         children: [
                           Icon(CustomIcon.statistic, size: 22, color: Color(btn_background)),
                           SizedBox(width: 4,),
-                          AutoSizeText("아잉",
+                          AutoSizeText(department,
                               style: TextStyle(
                                   fontWeight: medium,
                                   fontSize: font_size[4],
@@ -78,34 +95,31 @@ class Info extends StatelessWidget {
                         ],
                       ),
                     ),
+                    // 아이콘
                     Positioned(
                         top: 11,
                         right: 11,
                         child: Row(
                           children: [
+                            // 수정
                             InkWell(
-                                onTap: () => sctr.add(true),//수정
+                                onTap: () {},
                                 child: Icon(CustomIcon.edit_rect, size: 22, color: Colors.black)),
                             SizedBox(width: 4,),
+                            // 삭제
                             InkWell(
-                                onTap: () => sctr.add(false),//삭제
+                                onTap: () => chart_sctr.add({ "remove" : [key.toString()] }),
                                 child: Icon(CustomIcon.cancel, size: 22, color: Colors.black))
                           ],
                         )
                     )
                   ])
           ),
-          Container(height: 1,margin: EdgeInsets.only(left: 0,top: 11,right: 0,bottom: 0),color: Color(line_color)),
+          Container(height: 1,margin: EdgeInsets.only(top: 11),color: Color(line_color)),
           // 전형
           Container(
-            // height: 58,
-            margin: EdgeInsets.only(left: 16,top: 16, right: 16, bottom: 0),
-            // decoration: BoxDecoration(color: Colors.red),
-            child: Column(
-              children: [
-                AdmissionUnit("경영학과",30,3.78,2.93,24),
-              ],
-            ),
+            margin: EdgeInsets.only(left: 16,top: 16, right: 16),
+            child: Column(children: children)
           )
         ])
     );
@@ -126,8 +140,10 @@ class AdmissionUnit extends StatelessWidget {
     return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // 전형 이름
         AutoSizeText("${unit}(${recruit})",style: TextStyle(fontSize: 12,fontWeight: medium),),
         SizedBox(height: 2,),
+        // 입시 결과 - 숫자
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -136,6 +152,7 @@ class AdmissionUnit extends StatelessWidget {
             AutoSizeText("${rate.toInt()}:1",style: TextStyle(fontSize: 11),),
           ],
         ),
+        // 입시 결과 - 그래프
         Stack(
           children: [
             LayoutBuilder(
@@ -166,6 +183,7 @@ class AdmissionUnit extends StatelessWidget {
             ),
           ],
         ),
+        // 그 외
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

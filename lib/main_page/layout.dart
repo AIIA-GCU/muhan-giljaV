@@ -21,7 +21,8 @@ class HomeLayout extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Color(app_background),
           elevation: 0,
-          title: Text("무한길잡이",style: TextStyle(color: Color(font_color_1),fontSize: 16),),
+          title: Text("무한길잡이",
+              style: TextStyle(color: Color(font_color_1), fontSize: 16)),
           actions: [
             IconButton(
               icon: Icon(CustomIcon.hamburger_menu, size: 18, color: Color(font_color_1),),
@@ -30,21 +31,20 @@ class HomeLayout extends StatelessWidget {
             ),
           ],
         ),
-        body: Container(
-            child: SafeArea(
-                child: SingleChildScrollView(
-                    child: Column(
-                        children: [
-                        // My Grade 위젯 - 이현
-                        MyGrade(),
-                        // 입시 결과표 위젯 - 호성
-                        EntranceChart(),
-                        // 표 생성 위젯 - 승우
-                        AddAverage()
-                      ]
-                    )
-                )
-            )
+        body: SafeArea(
+          child: GestureDetector(
+            onTap: () => addavg_sctr.add({ 0 : [] }),
+            child: SingleChildScrollView(
+                child: Column(children: [
+                  // My Grade 위젯 - 이현
+                  MyGrade(),
+                  // 입시 결과표 위젯 - 호성
+                  EntranceChart(),
+                  // 표 생성 위젯 - 승우
+                  AddAverage()
+                ])
+            ),
+          )
         )
     );
   }
