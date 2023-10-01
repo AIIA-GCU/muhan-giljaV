@@ -1,12 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:aiia/config/variables.dart';
 
-class AddAverage extends StatefulWidget {
-  const AddAverage({super.key});
+
+
+class AddAverage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Container(
+        width: double.infinity,
+        child: Column(
+          children: [
+            MyExpansionTile(title: 'Drawer 1'),
+            MyExpansionTile(title: 'Drawer 2'),
+            MyExpansionTile(title: 'Drawer 3'),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('Button'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyExpansionTile extends StatelessWidget {
+  final String title;
+
+  const MyExpansionTile({Key? key, required this.title}) : super(key: key);
 
   @override
-  State<AddAverage> createState() => _AddAverageState();
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      title: Text(title),
+      children: [
+        ListTile(
+          title: Text('Option 1'),
+          onTap: () {},
+        ),
+        ListTile(
+          title: Text('Option 2'),
+          onTap: () {},
+        ),
+        // 여기에 더 많은 ListTile 위젯을 추가할 수 있습니다.
+      ],
+    );
+  }
 }
+/*
 
 class _AddAverageState extends State<AddAverage> {
   String selectedDropdownItem1 = "대학을 선택하세요.";
@@ -220,7 +263,7 @@ class _AddAverageState extends State<AddAverage> {
                           ),
                         ),
 
-                        SizedBox(height: 26.0),
+                        SizedBox(height: 16.0),
                         ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
@@ -607,3 +650,4 @@ class _AddAverageState extends State<AddAverage> {
     );
   }
 }
+*/
